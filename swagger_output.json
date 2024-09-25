@@ -1,0 +1,6584 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "My API",
+    "description": "API Documentation",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000/api",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Endpoints related to user as well as account operations"
+    },
+    {
+      "name": "Jobs",
+      "description": "Endpoints related to Jobs "
+    },
+    {
+      "name": "Applications",
+      "description": "API for applications"
+    },
+    {
+      "name": "Roles",
+      "description": "API for roles"
+    },
+    {
+      "name": "Logs",
+      "description": "API for logs"
+    },
+    {
+      "name": "Permissions",
+      "description": "API for permissions"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Please enter JWT or API Key with Bearer into field"
+    }
+  },
+  "paths": {
+    "/application/create": {
+      "post": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Create new application",
+        "description": "Create new application with new data",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new application with some informations",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cvId": {
+                  "type": "string",
+                  "example": "6666bc65e99a8259df75f575"
+                },
+                "jobId": {
+                  "type": "string",
+                  "example": "JD01"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "cv"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "created successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/application/{applicationId}": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Get application",
+        "description": "Get Application by Id",
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application Id",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "6666bc65e99a8259df75f575"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Update application",
+        "description": "Update Application by Id and new Data",
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update Application with new informations",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cvId": {
+                  "type": "string",
+                  "example": "6666bc65e99a8259df75f575"
+                },
+                "jobId": {
+                  "type": "string",
+                  "example": "JD01"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "state1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Update successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Delete application",
+        "description": "Delete Application by Id",
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application id",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "665fe8ccc5a09967910db414"
+                }
+              }
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Change status",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "state1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "deleted application successfully"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/application/detail/{applicationId}": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Get detail application",
+        "description": "Get detail about cv and user profile Application by Id",
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application Id",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "6666bc65e99a8259df75f575"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/application/job/{jobId}": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Get Application by Job Id",
+        "description": "API for getting application by using job id",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "job id",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "666bba927946ff93a04a0ff8"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Get application successfully"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/application/getbyuser": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Get all applications by user",
+        "description": "API to get all the applications that the user has applied for and its current status",
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Successful"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "666aa0d6f029fcd5f60eac98"
+                      },
+                      "jobTitle_VN": {
+                        "type": "string",
+                        "example": "Thực tập sinh"
+                      },
+                      "jobTitle_EN": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "currentState": {
+                        "type": "string",
+                        "example": "cv"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/application/export-job/{jobId}": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Export Excel All Candidates by Job Id",
+        "description": "API for getting candidates by using job id and export to excel",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "job id",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "666bba927946ff93a04a0ff8"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Get application successfully"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/applications": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Get All applications",
+        "description": "Get applications have in page",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Sucessful"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/application/": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Filter application",
+        "description": "Filter get application with Page and limit",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "number"
+                    },
+                    "example": {
+                      "type": "number",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "limit": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "number"
+                    },
+                    "example": {
+                      "type": "number",
+                      "example": 3
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Filter successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/application/cv/{cvId}": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Get Application By Cv Id",
+        "description": "API for getting candidates profile by using cv ID",
+        "parameters": [
+          {
+            "name": "cvId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "cvId id",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "6673fa762aee7010d9cf309e"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Get application successfully"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/application/changestatus/{applicationId}": {
+      "put": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Get application",
+        "description": "Get Application by Id and Status",
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application Id"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status (Accept or Reject)",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Accept",
+              "Reject"
+            ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/certificate/create": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Create new Certificate",
+        "description": "Users create their own certificates",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "docs",
+            "in": "formData",
+            "type": "file",
+            "required": false,
+            "description": "Certificate file"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Certificate name"
+          },
+          {
+            "name": "type",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Certificate type"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Certificate description"
+          },
+          {
+            "name": "issueDate",
+            "in": "formData",
+            "type": "Date",
+            "required": false,
+            "description": "issue date"
+          },
+          {
+            "name": "expiryDate",
+            "in": "formData",
+            "type": "Date",
+            "required": false,
+            "description": "expiry date"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fileURL": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "schema": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Successful"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "6673ce5fb2129c80b6779e2b"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2024-06-20T06:38:23.216Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2024-06-20T06:38:23.216Z"
+                    },
+                    "isActive": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "isDeleted": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "English"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "English"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "English Vip"
+                    },
+                    "userId": {
+                      "type": "string",
+                      "example": "666bf5e7ae57ee0d95c4f670"
+                    },
+                    "fileURL": {
+                      "type": "string",
+                      "example": "uploads/certificate/create/1718865503209-VipPro.pdf"
+                    },
+                    "issueDate": {
+                      "type": "string",
+                      "example": "2022-07-18T17:00:00.000Z"
+                    },
+                    "expiryDate": {
+                      "type": "string",
+                      "example": "2024-07-18T17:00:00.000Z"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/certificate/get/{_id}": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Get certificate",
+        "description": "Get certificate by id",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Certificate id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Get certificate successful"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "6673ce5fb2129c80b6779e2b"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "English"
+                        },
+                        "type": {
+                          "type": "string",
+                          "example": "English"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": "English Vip"
+                        },
+                        "userId": {
+                          "type": "string",
+                          "example": "666bf5e7ae57ee0d95c4f670"
+                        },
+                        "fileURL": {
+                          "type": "string",
+                          "example": "uploads/certificate/create/1718865503209-VipPro.pdf"
+                        },
+                        "issueDate": {
+                          "type": "string",
+                          "example": "2022-07-18T17:00:00.000Z"
+                        },
+                        "expiryDate": {
+                          "type": "string",
+                          "example": "2024-07-18T17:00:00.000Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Certificate not found!"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/certificate/getbyuser/{userId}": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Get certificate",
+        "description": "Get certificate by user id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Get all certificate by user id successful"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "6673ce5fb2129c80b6779e2b"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "English"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "English"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "English Vip"
+                          },
+                          "userId": {
+                            "type": "string",
+                            "example": "666bf5e7ae57ee0d95c4f670"
+                          },
+                          "fileURL": {
+                            "type": "string",
+                            "example": "uploads/certificate/create/1718865503209-VipPro.pdf"
+                          },
+                          "issueDate": {
+                            "type": "string",
+                            "example": "2022-07-18T17:00:00.000Z"
+                          },
+                          "expiryDate": {
+                            "type": "string",
+                            "example": "2024-07-18T17:00:00.000Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "This account has not uploaded any certificates yet"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/certificate/getall/": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Get all certificates",
+        "description": "Get all certificates in database",
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Get All certificates successful"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "6673ce5fb2129c80b6779e2b"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "English"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "English"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "English Vip"
+                          },
+                          "userId": {
+                            "type": "string",
+                            "example": "666bf5e7ae57ee0d95c4f670"
+                          },
+                          "fileURL": {
+                            "type": "string",
+                            "example": "uploads/certificate/create/1718865503209-VipPro.pdf"
+                          },
+                          "issueDate": {
+                            "type": "string",
+                            "example": "2022-07-18T17:00:00.000Z"
+                          },
+                          "expiryDate": {
+                            "type": "string",
+                            "example": "2024-07-18T17:00:00.000Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/certificate/update/{_id}": {
+      "put": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Update certificate",
+        "description": "Update certificate by id",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Certificate id"
+          },
+          {
+            "name": "docs",
+            "in": "formData",
+            "type": "file",
+            "required": false,
+            "description": "Certificate file"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Certificate name"
+          },
+          {
+            "name": "type",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Certificate type"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Certificate description"
+          },
+          {
+            "name": "issueDate",
+            "in": "formData",
+            "type": "Date",
+            "required": false,
+            "description": "issue date"
+          },
+          {
+            "name": "expiryDate",
+            "in": "formData",
+            "type": "Date",
+            "required": false,
+            "description": "expiry date"
+          },
+          {
+            "name": "isActive",
+            "in": "formData",
+            "type": "boolean",
+            "required": false,
+            "description": "Active?"
+          },
+          {
+            "name": "isDeleted",
+            "in": "formData",
+            "type": "boolean",
+            "required": false,
+            "description": "Delete?"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "any"
+                },
+                "schema": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Update certificate successfully!"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "6673ce5fb2129c80b6779e2b"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Tiếng Việt"
+                        },
+                        "type": {
+                          "type": "string",
+                          "example": "Tiếng Việt"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": "Tiếng Việt Vip"
+                        },
+                        "userId": {
+                          "type": "string",
+                          "example": "666bf5e7ae57ee0d95c4f670"
+                        },
+                        "fileURL": {
+                          "type": "string",
+                          "example": "uploads/certificate/create/1718865503209-VipPro.pdf"
+                        },
+                        "issueDate": {
+                          "type": "string",
+                          "example": "2022-07-18T17:00:00.000Z"
+                        },
+                        "expiryDate": {
+                          "type": "string",
+                          "example": "2024-07-18T17:00:00.000Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/certificate/delete/{_id}": {
+      "delete": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Delete certificate",
+        "description": "Delete certificate by id",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Certificate id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Delete certificate successfully!"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/company/create": {
+      "post": {
+        "tags": [
+          "Companys"
+        ],
+        "summary": "Create new Company",
+        "description": "Users create their own Company",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new company with some informations",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "companyName": {
+                  "type": "string",
+                  "example": "Công ty Vip Pro"
+                },
+                "industry": {
+                  "type": "string",
+                  "example": "Công nghệ thông tin"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "Thành Phố Hồ Chí Minh"
+                },
+                "companySize": {
+                  "type": "string",
+                  "example": "500"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "Quận 7"
+                },
+                "website": {
+                  "type": "string",
+                  "example": "vippro.com"
+                },
+                "contactInfo": {
+                  "type": "string",
+                  "example": "0987654321"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "ngotrongnhan12a4chilang@gmail.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Successful"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "6673d30139c0cfc004293f89"
+                    },
+                    "companyName": {
+                      "type": "string",
+                      "example": "Công ty Vip Pro"
+                    },
+                    "industry": {
+                      "type": "string",
+                      "example": "Công nghệ thông tin"
+                    },
+                    "location": {
+                      "type": "string",
+                      "example": "Thành Phố Hồ Chí Minh"
+                    },
+                    "companySize": {
+                      "type": "string",
+                      "example": "500"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "Quận 7"
+                    },
+                    "website": {
+                      "type": "string",
+                      "example": "vippro.com"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "ngotrongnhan12a4chilang@gmail.com"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "pending"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/company/status/{_id}": {
+      "post": {
+        "tags": [
+          "Companys"
+        ],
+        "summary": "Accept company",
+        "description": "Accept company and send email",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Company id"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status filter for company",
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ],
+            "required": false
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "schema",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Company have been rejected"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "6673d30139c0cfc004293f89"
+                    },
+                    "companyName": {
+                      "type": "string",
+                      "example": "Công ty Vip Pro"
+                    },
+                    "industry": {
+                      "type": "string",
+                      "example": "Công nghệ thông tin"
+                    },
+                    "location": {
+                      "type": "string",
+                      "example": "Thành Phố Hồ Chí Minh"
+                    },
+                    "companySize": {
+                      "type": "string",
+                      "example": "500"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "Quận 7"
+                    },
+                    "website": {
+                      "type": "string",
+                      "example": "vippro.com"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "ngotrongnhan12a4chilang@gmail.com"
+                    },
+                    "apiKey": {
+                      "type": "string",
+                      "example": "$2a$10$qwB5nhVeCMZAof.QBJSeiuXCZ0S1xFa9Ro5cA9nOA55HcFdo4UnGu"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "rejected"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2024-06-20T06:58:09.259Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2024-06-20T07:09:58.044Z"
+                    },
+                    "isActive": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "isDeleted": {
+                      "type": "boolean",
+                      "example": false
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "created company successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "6673d30139c0cfc004293f89"
+                    },
+                    "companyName": {
+                      "type": "string",
+                      "example": "Công ty Vip Pro"
+                    },
+                    "industry": {
+                      "type": "string",
+                      "example": "Công nghệ thông tin"
+                    },
+                    "location": {
+                      "type": "string",
+                      "example": "Thành Phố Hồ Chí Minh"
+                    },
+                    "companySize": {
+                      "type": "string",
+                      "example": "500"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "Quận 7"
+                    },
+                    "website": {
+                      "type": "string",
+                      "example": "vippro.com"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "ngotrongnhan12a4chilang@gmail.com"
+                    },
+                    "apiKey": {
+                      "type": "string",
+                      "example": "$2a$10$qwB5nhVeCMZAof.QBJSeiuXCZ0S1xFa9Ro5cA9nOA55HcFdo4UnGu"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "approved"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid company staus"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/company/get-company/{companyId}": {
+      "get": {
+        "tags": [
+          "Companys"
+        ],
+        "summary": "Get company",
+        "description": "Get company",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Successfull"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "6672811330255e49d32df209"
+                    },
+                    "companyName": {
+                      "type": "string",
+                      "example": "Amazing"
+                    },
+                    "apiKey": {
+                      "type": "string",
+                      "example": "12345676"
+                    },
+                    "isDeleted": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "isActive": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2024-06-19T06:56:19.400Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2024-06-19T08:08:52.826Z"
+                    },
+                    "__v": {
+                      "type": "number",
+                      "example": 0
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Company not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/company/update-company/{companyId}": {
+      "put": {
+        "tags": [
+          "Companys"
+        ],
+        "summary": "Update company",
+        "description": "Create company",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Some informations of company",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "websize": {
+                  "type": "string",
+                  "example": "amazing123.vn"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Updated company successfull"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/company/delete-company/{companyId}": {
+      "delete": {
+        "tags": [
+          "Companys"
+        ],
+        "summary": "Create company",
+        "description": "Create company",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Some informations of company",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Deleted successfull"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/company": {
+      "get": {
+        "tags": [
+          "Companys"
+        ],
+        "summary": "Get All Company with filter Status",
+        "description": "Status filter can help admin get company with Page and limit",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page",
+            "type": "number"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit",
+            "type": "number"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "get status of company",
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ],
+            "required": false
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "schema",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Get all company successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "companyName": {
+                        "type": "string",
+                        "example": "Công ty cong nghe a"
+                      },
+                      "industry": {
+                        "type": "string",
+                        "example": "Hệ thống thông tin"
+                      },
+                      "location": {
+                        "type": "string",
+                        "example": "Thành Phố Hồ Chí Minh"
+                      },
+                      "companySize": {
+                        "type": "string",
+                        "example": "500"
+                      },
+                      "address": {
+                        "type": "string",
+                        "example": "Quận 5"
+                      },
+                      "website": {
+                        "type": "string",
+                        "example": "congnghea.com"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "doanphuongnam.2002@gmail.com"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "pending"
+                      },
+                      "isActive": {
+                        "type": "boolean",
+                        "example": true
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/config-slot": {
+      "post": {
+        "tags": [
+          "Companys"
+        ],
+        "summary": "Config slot interview for company",
+        "description": "Configure the interview slot, this interview slot to estimate the interview time of the interviews. Each company will configure its own slots, including slotTime which is the time for each interview slot, slot object will decide how many interview slots each state has.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add slot time and slot for each state. Notes: slot.keys only accepts parameters including state1, state2 and state3, other states will throw error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "slotTime": {
+                  "type": "number",
+                  "example": 15
+                },
+                "slot": {
+                  "type": "object",
+                  "properties": {
+                    "state1": {
+                      "type": "number",
+                      "example": 2
+                    },
+                    "state2": {
+                      "type": "number",
+                      "example": 3
+                    },
+                    "state3": {
+                      "type": "number",
+                      "example": 3
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Config slot interview successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cv/create": {
+      "post": {
+        "tags": [
+          "CVs"
+        ],
+        "summary": "Create new CV",
+        "description": "Users create their own CVs",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "docs",
+            "in": "formData",
+            "type": "file",
+            "required": false,
+            "description": "CV file"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cvPath": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "schema": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Successful"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "666bf5e7ae57ee0d95c4f670"
+                    },
+                    "userId": {
+                      "type": "string",
+                      "example": "666bf5e7ae57ee0d95c4f670"
+                    },
+                    "cvPath": {
+                      "type": "string",
+                      "example": "uploads/cv/create/1718863781696-VipPro.pdf"
+                    },
+                    "isApproved": {
+                      "type": "boolean",
+                      "example": false
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "This user have been upload a CV, If you wanna change your CV, please update your CV"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cv/get/{_id}": {
+      "get": {
+        "tags": [
+          "CVs"
+        ],
+        "summary": "Get CV",
+        "description": "Get CV by id",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "CV id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Get CV successful"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "6673c7a582114c6c474191d3"
+                        },
+                        "userId": {
+                          "type": "string",
+                          "example": "666bf5e7ae57ee0d95c4f670"
+                        },
+                        "cvPath": {
+                          "type": "string",
+                          "example": "uploads/cv/create/1718863781696-VipPro.pdf"
+                        },
+                        "isApproved": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "CV not found!"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cv/getbyuser/{userId}": {
+      "get": {
+        "tags": [
+          "CVs"
+        ],
+        "summary": "Get CV",
+        "description": "Get CV by user id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "user id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Get CV successful"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "6673c7a582114c6c474191d3"
+                        },
+                        "userId": {
+                          "type": "string",
+                          "example": "666bf5e7ae57ee0d95c4f670"
+                        },
+                        "cvPath": {
+                          "type": "string",
+                          "example": "uploads/cv/create/1718863781696-VipPro.pdf"
+                        },
+                        "isApproved": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "This account has not uploaded any CV yet"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cv/getbyuser": {
+      "get": {
+        "tags": [
+          "CVs"
+        ],
+        "summary": "Get CV",
+        "description": "Get CV by user id",
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Get CV successful"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "6673c7a582114c6c474191d3"
+                        },
+                        "userId": {
+                          "type": "string",
+                          "example": "666bf5e7ae57ee0d95c4f670"
+                        },
+                        "cvPath": {
+                          "type": "string",
+                          "example": "uploads/cv/create/1718863781696-VipPro.pdf"
+                        },
+                        "isApproved": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "This account has not uploaded any CV yet"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cv/getall/": {
+      "get": {
+        "tags": [
+          "CVs"
+        ],
+        "summary": "Get all CVs",
+        "description": "Get all CVs in database",
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Get All CV successful"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "6673c7a582114c6c474191d3"
+                          },
+                          "userId": {
+                            "type": "string",
+                            "example": "666bf5e7ae57ee0d95c4f670"
+                          },
+                          "cvPath": {
+                            "type": "string",
+                            "example": "uploads/cv/create/1718863781696-VipPro.pdf"
+                          },
+                          "isApproved": {
+                            "type": "boolean",
+                            "example": false
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cv/update/{_id}": {
+      "put": {
+        "tags": [
+          "CVs"
+        ],
+        "summary": "Update CV",
+        "description": "Update CV by id",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "CV id"
+          },
+          {
+            "name": "docs",
+            "in": "formData",
+            "type": "file",
+            "required": false,
+            "description": "CV file"
+          },
+          {
+            "name": "isActive",
+            "in": "formData",
+            "type": "boolean",
+            "required": false,
+            "description": "Active?"
+          },
+          {
+            "name": "isDeleted",
+            "in": "formData",
+            "type": "boolean",
+            "required": false,
+            "description": "Delete?"
+          },
+          {
+            "name": "isApproved",
+            "in": "formData",
+            "type": "boolean",
+            "required": false,
+            "description": "Approve?"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "any"
+                },
+                "schema": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Update CV successfully!"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "6673c7a582114c6c474191d3"
+                        },
+                        "userId": {
+                          "type": "string",
+                          "example": "666bf5e7ae57ee0d95c4f670"
+                        },
+                        "cvPath": {
+                          "type": "string",
+                          "example": "uploads/cv/create/1718863781696-VipPro.pdf"
+                        },
+                        "isApproved": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cv/delete/{_id}": {
+      "delete": {
+        "tags": [
+          "CVs"
+        ],
+        "summary": "Delete CV",
+        "description": "Delete CV by id",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "CV id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Delete CV successfully!"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/interview/create": {
+      "post": {
+        "tags": [
+          "Interview"
+        ],
+        "summary": " Login to create Interview",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new job with some Interview",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "applicationId": {
+                  "type": "string",
+                  "example": "666aa0d6f029fcd5f60eac98"
+                },
+                "interviewerId": {
+                  "type": "string",
+                  "example": "6673df33a08132f1ae962409"
+                },
+                "intervieweeId": {
+                  "type": "string",
+                  "example": "666bf5e7ae57ee0d95c4f670"
+                },
+                "interviewContent": {
+                  "type": "string",
+                  "example": "Phỏng vấn ác quỷ 1 chọi 10,000 người"
+                },
+                "linkMeeting": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "created successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/interview/find/{id}": {
+      "get": {
+        "tags": [
+          "Interview"
+        ],
+        "summary": " get job by id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "string",
+              "example": "667a49fe9a759d80f52a77ed"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interview/update/{id}": {
+      "put": {
+        "tags": [
+          "Interview"
+        ],
+        "summary": " update by id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "string",
+              "example": "667a49fe9a759d80f52a77ed"
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update new Interview with some informations",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "interviewContent": {
+                  "type": "string",
+                  "example": "Changed text"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/interview/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Interview"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "string",
+              "example": "667a49fe9a759d80f52a77ed"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "created successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/job/create": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": " Login to create Jobs",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new job with some informations",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title_VN": {
+                  "type": "string",
+                  "example": "Thực tập sinh"
+                },
+                "position": {
+                  "type": "string",
+                  "example": "Thực tập"
+                },
+                "typeOfWork": {
+                  "type": "string",
+                  "example": "Thực tập sinh backend"
+                },
+                "occupation": {
+                  "type": "string",
+                  "example": "Công nghệ thông tin"
+                },
+                "major": {
+                  "type": "string",
+                  "example": "Khoa học máy tính"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "male"
+                },
+                "startingSalary": {
+                  "type": "string",
+                  "example": "1.000.000"
+                },
+                "vacanciesNum": {
+                  "type": "string",
+                  "example": "3"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Hồ Chí Minh"
+                },
+                "description_VN": {
+                  "type": "string",
+                  "example": "Việc nhẹ lương cao"
+                },
+                "requirement_VN": {
+                  "type": "string",
+                  "example": "Không cần kinh nghiệm"
+                },
+                "benefit_VN": {
+                  "type": "string",
+                  "example": "Kinh nghiệm"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "created successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/job/find/{id}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": " get job by id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "string",
+              "example": "666bba187946ff93a04a0ff6"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/job/update/{id}": {
+      "put": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": " update by id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "string",
+              "example": "666bba187946ff93a04a0ff6"
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new job with some informations",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title_VN": {
+                  "type": "string",
+                  "example": "Giám đốc"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/job/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "string",
+              "example": "666bba187946ff93a04a0ff6"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "created successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/job/changeStatus/{id}": {
+      "put": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "change jobs status, send notification realtime after changed",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status filter for jobs",
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected",
+              "open",
+              "closed",
+              "expired",
+              "archived"
+            ],
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/job/changeStatusForCompany/{id}": {
+      "put": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "change jobs status for company, send notification realtime after changed",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status filter for jobs (company)",
+            "type": "string",
+            "enum": [
+              "open",
+              "closed"
+            ],
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/job/getAllForCandidate/{page}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": " get jobs for candidate, return a list of aprroved jobs",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "get jobs for candidate",
+            "type": "string",
+            "enum": [
+              "approved"
+            ],
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/job/findByCompany/{page}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": " Get a list of jobs based on the companyId of the currently logged-in user",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "result": {
+              "message": "get jobs by company successful",
+              "statusCode": 201,
+              "data": {
+                "result": []
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/job/search/{page}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": " Get a list of jobs according to criteria",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "major",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Khoa học máy tính"
+            },
+            "required": true
+          },
+          {
+            "name": "occupation",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Công nghệ thông tin"
+            },
+            "required": true
+          },
+          {
+            "name": "position",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Thực tập"
+            },
+            "required": true
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Thực tập sinh"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/jobs/{page}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": " get jobs for admin",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "get jobs for admin,get jobs for candidate, return a all jobs, can filter by status",
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected",
+              "open",
+              "closed",
+              "expired",
+              "archived"
+            ],
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Find jobs",
+        "description": "Find jobs by some infor and pagination",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "some infor of job",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "typeOfWork": {
+                  "type": "string",
+                  "example": "Thực tập sinh backend"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Hồ Chí Minh"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Change pass successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "666bba187946ff93a04a0ff6"
+                          },
+                          "companyId": {
+                            "type": "string",
+                            "example": "666aa8bb85a30ba8773965c2"
+                          },
+                          "title_VN": {
+                            "type": "string",
+                            "example": "Thực tập sinh"
+                          },
+                          "title_EN": {
+                            "type": "string",
+                            "example": ""
+                          },
+                          "position": {
+                            "type": "string",
+                            "example": "Thực tập."
+                          },
+                          "typeOfWork": {
+                            "type": "string",
+                            "example": "Thực tập sinh backend"
+                          },
+                          "occupation": {
+                            "type": "string",
+                            "example": "Công nghệ thông tin"
+                          },
+                          "major": {
+                            "type": "string",
+                            "example": "Khoa học máy tính"
+                          },
+                          "gender": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "expirationDate": {
+                            "type": "string",
+                            "example": "2024-06-14T03:29:42.390Z"
+                          },
+                          "startingSalary": {
+                            "type": "string",
+                            "example": "1.000.000"
+                          },
+                          "vacanciesNum": {
+                            "type": "string",
+                            "example": "3"
+                          },
+                          "city": {
+                            "type": "string",
+                            "example": "Hồ Chí Minh"
+                          },
+                          "district": {
+                            "type": "string",
+                            "example": ""
+                          },
+                          "address": {
+                            "type": "string",
+                            "example": ""
+                          },
+                          "description_VN": {
+                            "type": "string",
+                            "example": "Việc nhẹ lương cao"
+                          },
+                          "description_EN": {
+                            "type": "string",
+                            "example": ""
+                          },
+                          "requirement_VN": {
+                            "type": "string",
+                            "example": "Không cần kinh nghiệm"
+                          },
+                          "requirement_EN": {
+                            "type": "string",
+                            "example": ""
+                          },
+                          "status": {
+                            "type": "string",
+                            "example": "pending"
+                          },
+                          "benefit_VN": {
+                            "type": "string",
+                            "example": "Kinh nghiệm"
+                          },
+                          "benefit_EN": {
+                            "type": "string",
+                            "example": ""
+                          },
+                          "applicationId": {
+                            "type": "array",
+                            "example": [
+                              "666aa0d6f029fcd5f60eac98"
+                            ],
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "isDeleted": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "isActive": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "example": "2024-06-14T03:33:44.317Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "example": "2024-06-14T03:33:44.317Z"
+                          },
+                          "__v": {
+                            "type": "number",
+                            "example": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/job/getJobsByRole/{page}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Find jobs by role",
+        "description": "Find jobs by role (Company find posted jobs, Candidate find applied for jobs) and pagination",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "666bba187946ff93a04a0ff6"
+                      },
+                      "title_VN": {
+                        "type": "string",
+                        "example": "Thực tập sinh"
+                      },
+                      "title_EN": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "position": {
+                        "type": "string",
+                        "example": "Thực tập."
+                      },
+                      "typeOfWork": {
+                        "type": "string",
+                        "example": "Thực tập sinh backend"
+                      },
+                      "occupation": {
+                        "type": "string",
+                        "example": "Công nghệ thông tin"
+                      },
+                      "major": {
+                        "type": "string",
+                        "example": "Khoa học máy tính"
+                      },
+                      "gender": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "expirationDate": {
+                        "type": "string",
+                        "example": "2024-06-14T03:29:42.390Z"
+                      },
+                      "startingSalary": {
+                        "type": "string",
+                        "example": "1.000.000"
+                      },
+                      "vacanciesNum": {
+                        "type": "string",
+                        "example": "3"
+                      },
+                      "city": {
+                        "type": "string",
+                        "example": "Hồ Chí Minh"
+                      },
+                      "district": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "address": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "description_VN": {
+                        "type": "string",
+                        "example": "Việc nhẹ lương cao"
+                      },
+                      "description_EN": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "requirement_VN": {
+                        "type": "string",
+                        "example": "Không cần kinh nghiệm"
+                      },
+                      "requirement_EN": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "benefit_VN": {
+                        "type": "string",
+                        "example": "Kinh nghiệm"
+                      },
+                      "benefit_EN": {
+                        "type": "string",
+                        "example": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/log/find/{logId}": {
+      "get": {
+        "tags": [
+          "Logs"
+        ],
+        "description": "API to get log by id",
+        "parameters": [
+          {
+            "name": "logId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log ID",
+            "example": "666c059edfe1ddd535a4df3a"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/log/all": {
+      "get": {
+        "tags": [
+          "Logs"
+        ],
+        "description": "API to get all logs",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "type": "number",
+            "example": 1
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit number",
+            "type": "number",
+            "example": 10
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "User ID",
+            "required": false,
+            "type": "string",
+            "example": "666bf5e7ae57ee0d95c4f670"
+          },
+          {
+            "name": "method",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "statusCode",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "ipAddress",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "timeStamp",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/notification/create": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "After the notification is created, it will send realtime to the userId in the notification",
+        "description": "This feature will be called automatically when there is a change in job status, candidate application status... After user successful logging in, frontend will connect to `socket io` and listen notifications event. Socket io demo clip: `https://drive.google.com/file/d/1IeGNNx8XWo7dGaP8ivS8NHuRtKY_H0OE/view?usp=sharing`",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new notification with some informations",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "666bf5e7ae57ee0d95c4f670"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Thông báo trúng tuyển"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Chúc mừng bạn đã trúng tuyển."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "string",
+                          "example": "666bf5e7ae57ee0d95c4f670"
+                        },
+                        "title": {
+                          "type": "string",
+                          "example": "Thông báo trúng tuyển"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Chúc mừng bạn đã trúng tuyển."
+                        },
+                        "isRead": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "isDeleted": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "isActive": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "_id": {
+                          "type": "string",
+                          "example": "6673ceaf76e0fe4c4fa0a5af"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2024-06-20T06:39:43.583Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "example": "2024-06-20T06:39:43.583Z"
+                        },
+                        "__v": {
+                          "type": "number",
+                          "example": 0
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notification/find/{id}": {
+      "get": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "Find by Id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Get successful"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "66710240d33963fee0b14179"
+                        },
+                        "userId": {
+                          "type": "string",
+                          "example": "667152037401438f605c8ae5"
+                        },
+                        "title": {
+                          "type": "string",
+                          "example": "Thông báo trúng tuyển"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Chúc mừng bạn đã trúng tuyển."
+                        },
+                        "isRead": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "isDeleted": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "isActive": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2024-06-18T03:42:56.735Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "example": "2024-06-18T03:42:56.736Z"
+                        },
+                        "__v": {
+                          "type": "number",
+                          "example": 0
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notification/update/{id}": {
+      "put": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "Update by Id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update new notification with some informations",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Thông báo KẾT QUẢ PHỎNG VẤN"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Chúc mừng bạn đã FAIL."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notification/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "Deleted by Id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "(Soft) Deleted successful"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 201
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notification/getAllByUser/{page}": {
+      "get": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "Status filter for notification",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "isRead",
+            "in": "query",
+            "description": "Status filter for notification",
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/notification/isRead/{id}": {
+      "put": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": " Update status isRead for notification",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/permission/create": {
+      "post": {
+        "tags": [
+          "Permissions"
+        ],
+        "summary": "Create new permission",
+        "description": "API to create new permission",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Create new permission with default permissions",
+            "schema": {
+              "$ref": "#/definitions/CreatePermissionRequest"
+            },
+            "example": {
+              "name": "Create User",
+              "description": "Create new user",
+              "bitwisePermission": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permission created successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/permission/all": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "summary": "Get all permissions",
+        "description": "API to get all permissions",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "type": "number",
+            "example": 1
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit number",
+            "type": "number",
+            "example": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permission found successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/permission/update/{permissionId}": {
+      "put": {
+        "tags": [
+          "Permissions"
+        ],
+        "summary": "Update permission",
+        "description": "API to update permission",
+        "parameters": [
+          {
+            "name": "permissionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Permission ID",
+            "example": "66790bf4d8fbf700fae168d8"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update permission with default permissions",
+            "schema": {
+              "$ref": "#/definitions/UpdatePermissionRequest"
+            },
+            "example": {
+              "name": "Create User",
+              "description": "Create new user",
+              "bitwisePermission": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permission updated successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/permission/find/{permissionId}": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "summary": "Get permission by id",
+        "description": "API to get permission by id",
+        "parameters": [
+          {
+            "name": "permissionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Permission ID",
+            "example": "66790bf4d8fbf700fae168d8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permission found successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/permission/delete/{permissionId}": {
+      "delete": {
+        "tags": [
+          "Permissions"
+        ],
+        "summary": "Delete permission",
+        "description": "API to delete permission",
+        "parameters": [
+          {
+            "name": "permissionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Permission ID",
+            "example": "66790bf4d8fbf700fae168d8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permission deleted successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/role/create": {
+      "post": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Create new role",
+        "description": "API to create new role",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Create new role with default permissions",
+            "schema": {
+              "$ref": "#/definitions/CreateRoleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Role created successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/role/all": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Get all roles",
+        "description": "API to get all roles",
+        "responses": {
+          "200": {
+            "description": "Roles found successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/role/update/{roleId}": {
+      "put": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Update role",
+        "description": "API to update role",
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update new role to HR",
+            "schema": {
+              "$ref": "#/definitions/UpdateRoleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Role updated successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Role not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/role/find/{roleId}": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Find role by id",
+        "description": "API to find role by id",
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Role found successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Role not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/role/delete/{roleId}": {
+      "delete": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Delete role",
+        "description": "API to delete role",
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Role deleted successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/role/permission": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Get permission",
+        "description": "Get permission for each role",
+        "responses": {
+          "200": {
+            "description": "Permissions found successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/role/claimPermission": {
+      "post": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Claim permission",
+        "description": "Claim permission for role",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Claim permission for role",
+            "schema": {
+              "$ref": "#/definitions/ClaimPermissionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permission claimed successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/role/revokePermission": {
+      "post": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Revoke permission",
+        "description": "Revoke permission for role",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Revoke permission for role",
+            "schema": {
+              "$ref": "#/definitions/RevokePermissionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permission revoked successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/user/create-candidate": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Register account with username, password and name of candidate",
+        "description": "This API is used for candidate to create accounts on website",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new user with some informations",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fullname": {
+                  "type": "string",
+                  "example": "Lưu Đức Hải"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "luuduchai"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "typeOfWork": {
+                  "type": "string",
+                  "example": "Full-time"
+                },
+                "careerGoal": {
+                  "type": "string",
+                  "example": "Trở thành Full-Nack Developer"
+                },
+                "gender": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "languageLevel": {
+                  "type": "string",
+                  "example": "B2"
+                },
+                "graduationTime": {
+                  "type": "string",
+                  "example": "2024-09-30"
+                },
+                "hometown": {
+                  "type": "string",
+                  "example": "Hải Phòng"
+                },
+                "education": {
+                  "type": "string",
+                  "example": "Đại học Tôn Đức Thắng"
+                },
+                "imagePath": {
+                  "type": "string",
+                  "example": "uploads/user/profile-candidate/1718352690139-profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg"
+                },
+                "birthday": {
+                  "type": "string",
+                  "example": "2000-05-15"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "example": "0123456789"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "luuduchai@gmail.com"
+                },
+                "studentId": {
+                  "type": "string",
+                  "example": "52000123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "created account successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 201
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Username is already exists"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login account with username and password",
+        "description": "Login with Json Web Token, return a pair of access token and refresh token, frontend will storage these keys and attach they to header author. In addition, backend will automatic storage access token on cookie of client with httpOnly mode",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "username & password",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "duchai"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Login successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjZhYjhiYTdmZWQ0ZmZkZGYyNTk1NTgiLCJpYXQiOjE3MTgyNzAxNTQsImV4cCI6MTcxODMwNjE1NH0.EQ7DzPawuiLCyUQJc0CvcNgUJpN7AFvEnI8-bs5TF1Q"
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjZhYjhiYTdmZWQ0ZmZkZGYyNTk1NTgiLCJpYXQiOjE3MTgyNzAxNTQsImV4cCI6MTcxODMwNjE1NH0.O8pyUzJ44qNl0_KiSkpSQmRa8bANAuimlMNtIECnvEY"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Username or password is incorrect"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/profile/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user candidate profile",
+        "description": "Get information of the candidate user by user id. This api can be used by company employee to get candidate profile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "string",
+              "example": "666bc56fcc7a332f032bc0e5"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Get user's information successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "666bf5e7ae57ee0d95c4f670"
+                    },
+                    "fullname": {
+                      "type": "string",
+                      "example": "Nguyễn Văn A"
+                    },
+                    "typeOfWork": {
+                      "type": "string",
+                      "example": "Full-time"
+                    },
+                    "careerGoal": {
+                      "type": "string",
+                      "example": "Trở thành chuyên gia về trí tuệ nhân tạo"
+                    },
+                    "gender": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "languageLevel": {
+                      "type": "string",
+                      "example": "Advanced"
+                    },
+                    "graduationTime": {
+                      "type": "string",
+                      "example": "2024-06-30T00:00:00.000Z"
+                    },
+                    "hometown": {
+                      "type": "string",
+                      "example": "Hà Nội"
+                    },
+                    "education": {
+                      "type": "string",
+                      "example": "Đại học Bách Khoa Hà Nội"
+                    },
+                    "imagePath": {
+                      "type": "string",
+                      "example": "uploads/user/profile-candidate/1718352690139-profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg"
+                    },
+                    "birthday": {
+                      "type": "string",
+                      "example": "2000-05-15T00:00:00.000Z"
+                    },
+                    "phoneNumber": {
+                      "type": "string",
+                      "example": "0123456789"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "nguyenvana@default.com"
+                    },
+                    "studentId": {
+                      "type": "string",
+                      "example": "20184001"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/profile-candidate": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update candidate profile",
+        "description": "Update candidate profile with candidate information as well as image profile. You can use this api to show candidates infor when they apply a job, so they can edit their personal information if any, and also force candidates to fill in personal information in the form before submitting. The user id will be obtained based on the access token provided from authorization",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "image",
+            "in": "formData",
+            "type": "file",
+            "required": false,
+            "description": "User image"
+          },
+          {
+            "name": "fullname",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Full name of the user",
+            "default": "Nguyễn Văn A"
+          },
+          {
+            "name": "typeOfWork",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Type of work",
+            "default": "Full-time"
+          },
+          {
+            "name": "careerGoal",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Career goal",
+            "default": "Trở thành chuyên gia về trí tuệ nhân tạo"
+          },
+          {
+            "name": "gender",
+            "in": "formData",
+            "type": "boolean",
+            "required": false,
+            "description": "Gender, true is female, false is male",
+            "default": true
+          },
+          {
+            "name": "languageLevel",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Language level",
+            "default": "Advanced"
+          },
+          {
+            "name": "graduationTime",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Graduation time",
+            "default": "2024-06-30"
+          },
+          {
+            "name": "hometown",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Hometown",
+            "default": "Hà Nội"
+          },
+          {
+            "name": "education",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Education",
+            "default": "Đại học Bách Khoa Hà Nội"
+          },
+          {
+            "name": "birthday",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Birthday",
+            "default": "2000-05-15"
+          },
+          {
+            "name": "phoneNumber",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Phone number",
+            "default": "0123456789"
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Email address",
+            "default": "nguyenvana@example.com"
+          },
+          {
+            "name": "studentId",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Student ID",
+            "default": "20184001"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "imagePath": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "updated user successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/company/profile-company": {
+      "put": {
+        "tags": [
+          "Companys"
+        ],
+        "summary": "Update company profile",
+        "description": "Update company profile with some informations. The user id will be obtained based on the access token provided from authorization",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "some informations",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "companyName": {
+                  "type": "string",
+                  "example": "Công ty TNHH ABC"
+                },
+                "industry": {
+                  "type": "string",
+                  "example": "Công nghệ thông tin"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "Hà Nội"
+                },
+                "companySize": {
+                  "type": "string",
+                  "example": "100-200"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "Số 123, Đường ABC, Quận XYZ, Hà Nội"
+                },
+                "website": {
+                  "type": "string",
+                  "example": "https://www.congtyabc.com"
+                },
+                "contactInfo": {
+                  "type": "string",
+                  "example": "contact@congtyabc.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "updated user successfully"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": 200
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/user/{id}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete user",
+        "description": "This api perform by admin, deletes account by user id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User id",
+            "schema": {
+              "type": "string",
+              "example": "666bc56fcc7a332f032bc0e5"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "deleted user successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User is not found!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/user/change-password": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Change password",
+        "description": "Change password and get new token",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "enter old and new pass word",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "oldPassword": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "newPassword": {
+                  "type": "string",
+                  "example": "123123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Change pass successfully"
+                },
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjZhYjhjMzdmZWQ0ZmZkZGYyNTk1NWMiLCJpYXQiOjE3MTgyNzAyMzYsImV4cCI6MTcxODMwNjIzNn0.3-FC12nvzxdkn2fQygueJOSr4zFGbGa5Snd2MeWOQoU"
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjZhYjhjMzdmZWQ0ZmZkZGYyNTk1NWMiLCJpYXQiOjE3MTgyNzAyMzYsImV4cCI6MTcxODMwNjIzNn0.FZjk64saVGh1ptlGzz8Ddxg5MeG0sr-qt_8EZymFiYA"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/refresh-token": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get new access token",
+        "description": "Get new access token",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "refreshToken",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refreshToken": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjY3Mjk5NDk0YWRlNmE3NTYzYjRjNTM1IiwiaWF0IjoxNzE4ODgzMDEwLCJleHAiOjE3MTg5MTkwMTB9.lurzOYZnEwehvseo2_vZO5jbRf2KsCfl_iWh_-Hd2ls"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/user/create-employee": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Register account with username, password and name of employee",
+        "description": "This API is used for company employee to create accounts on website",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "enter old and new pass word",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fullname": {
+                  "type": "string",
+                  "example": "MTP Company"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "mtpcompany"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully"
+          },
+          "400": {
+            "description": "Error"
+          },
+          "500": {
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/user/profile-employee/{_id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user employee profile",
+        "description": "Get information of the employee user by user id",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User id",
+            "example": "667299494ade6a7563b4c535"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully"
+          },
+          "400": {
+            "description": "Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update employee profile",
+        "description": "",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User id",
+            "example": "667299494ade6a7563b4c535"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update employee profile",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fullname": {
+                  "type": "string",
+                  "example": "X Company"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully"
+          },
+          "400": {
+            "description": "Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/user/employee/{_id}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete employee",
+        "description": "Delete employee by user id",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User id",
+            "example": "667299494ade6a7563b4c535"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully"
+          },
+          "400": {
+            "description": "Error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CreateRoleRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Candidate"
+        },
+        "description": {
+          "type": "string",
+          "example": "Candidate"
+        },
+        "bitwisePermission": {
+          "type": "number",
+          "example": 15
+        }
+      }
+    },
+    "UpdateRoleRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Company"
+        },
+        "description": {
+          "type": "string",
+          "example": "Company"
+        },
+        "bitwisePermission": {
+          "type": "number",
+          "example": 496
+        }
+      }
+    },
+    "CreateLogRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "666bcabb147ce0ae646c73b8"
+        },
+        "action": {
+          "type": "string",
+          "example": "[POST] /api/user/login"
+        },
+        "ipAddress": {
+          "type": "string",
+          "example": "1.1.1.1"
+        },
+        "deviceId": {
+          "type": "string",
+          "example": "1"
+        },
+        "timeStamp": {
+          "type": "string",
+          "example": "2024-06-14T00:00:00.000Z"
+        }
+      }
+    },
+    "UpdateLogRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "666bcabb147ce0ae646c73b8"
+        },
+        "action": {
+          "type": "string",
+          "example": "[POST] /api/user/logout"
+        },
+        "ipAddress": {
+          "type": "string",
+          "example": "1.1.1.1"
+        },
+        "deviceId": {
+          "type": "string",
+          "example": "1"
+        },
+        "timeStamp": {
+          "type": "string",
+          "example": "2024-06-14T00:00:00.000Z"
+        }
+      }
+    },
+    "CreatePermissionRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Create"
+        },
+        "description": {
+          "type": "string",
+          "example": "Create"
+        },
+        "bitwisePermission": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "UpdatePermissionRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Update"
+        },
+        "description": {
+          "type": "string",
+          "example": "Update"
+        },
+        "bitwisePermission": {
+          "type": "number",
+          "example": 2
+        }
+      }
+    },
+    "FindPermissionRequest": {
+      "type": "object",
+      "properties": {
+        "permissionId": {
+          "type": "string",
+          "example": "6679206fac61b614f8cf68ff"
+        }
+      }
+    },
+    "RevokePermissionRequest": {
+      "type": "object",
+      "properties": {
+        "roleId": {
+          "type": "string",
+          "example": "666aa77f5dca8306b94520f3"
+        },
+        "permissionId": {
+          "type": "string",
+          "example": "6679206fac61b614f8cf68ff"
+        }
+      }
+    },
+    "ClaimPermissionRequest": {
+      "type": "object",
+      "properties": {
+        "roleId": {
+          "type": "string",
+          "example": "666aa77f5dca8306b94520f3"
+        },
+        "permissionId": {
+          "type": "string",
+          "example": "6679206fac61b614f8cf68ff"
+        }
+      }
+    }
+  }
+}

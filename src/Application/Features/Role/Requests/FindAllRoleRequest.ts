@@ -1,0 +1,4 @@
+export class FindAllRoleRequest {
+    constructor() {
+    }
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Home Page</title> 
+  
+    <style type="text/css" media="screen"> 
+        body { 
+            text-decoration-color: white; 
+            font-size: 3em; 
+        } 
+    </style> 
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+</head> 
+  
+<body> 
+    <center>This is our home page User 2.</center> 
+</body> 
+
+<script>
+    window.onload = function () {
+        const socket = io.connect('http://localhost:3000', {
+            auth: { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjZiZmI4MDZjYTgxNDM0NTU3YWRhNGEiLCJpYXQiOjE3MTg3MDE3ODYsImV4cCI6MTcxODczNzc4Nn0.tAf3mmGEkQvw2PCYnFO7z0fB0Kmj74B2PqqLMEfIST8' }
+        });
+        socket.on('connect', () => {
+            console.log('Connected to server')
+        })
+        socket.on('disconnect', () => console.log('Disconnected to server'))
+        socket.on('error', (e) => console.log(`Error connected to server ${e.message}`))
+        socket.on('notification', (message) => {
+            console.log('Notification received:', message);
+        });
+    }
+</script>
+</html>
